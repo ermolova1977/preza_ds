@@ -1,0 +1,625 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Презентация: Антикризисная стратегия продаж</title>
+    <!-- Font Awesome for Icons (optional but nice) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: #1e2b3c; /* dark background for contrast */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .slider-container {
+            max-width: 1280px;
+            width: 100%;
+            position: relative;
+        }
+
+        /* slides carousel */
+        .slides {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            background: #f2f5f9; /* soft background for slides */
+            gap: 1px;
+            scrollbar-width: thin;
+            scrollbar-color: #2b6c94 #cbd5e1;
+        }
+
+        .slides::-webkit-scrollbar {
+            height: 10px;
+        }
+        .slides::-webkit-scrollbar-track {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .slides::-webkit-scrollbar-thumb {
+            background: #2b6c94;
+            border-radius: 10px;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            padding: 48px 56px;
+            background: white;
+            min-height: 620px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 32px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+        }
+
+        /* slide content */
+        .slide-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .slide-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2b6c94;
+            background: #e2effa;
+            padding: 8px 20px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        .slide-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0a1a2b;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .title-underline {
+            height: 4px;
+            width: 80px;
+            background: #f4b836;
+            margin: 16px 0 24px 0;
+            border-radius: 4px;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            flex: 1;
+        }
+
+        .tesis-list {
+            flex: 2;
+            min-width: 280px;
+        }
+
+        .tesis-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 22px;
+            align-items: flex-start;
+        }
+
+        .tesis-icon {
+            color: #2b6c94;
+            font-size: 1.5rem;
+            min-width: 36px;
+            text-align: center;
+            padding-top: 3px;
+        }
+
+        .tesis-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #1e2b3c;
+        }
+
+        .logic-box {
+            flex: 1;
+            min-width: 240px;
+            background: #f0f6fd;
+            border-radius: 28px;
+            padding: 28px 24px;
+            border-left: 6px solid #f4b836;
+            box-shadow: 0 6px 14px rgba(0,20,40,0.08);
+        }
+
+        .logic-label {
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: #2b6c94;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logic-content {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0f2b3f;
+            line-height: 1.5;
+        }
+
+        .argument-block {
+            margin-top: 24px;
+            background: #d9e9fa;
+            padding: 20px 24px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border: 1px solid #aac9e3;
+            color: #0b314a;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .argument-icon {
+            font-size: 2rem;
+            color: #c2492c; /* accent */
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #546e7a;
+            border-top: 1px dashed #b0c7db;
+            padding-top: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Navigation */
+        .nav-dots {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .nav-dot {
+            width: 14px;
+            height: 14px;
+            background: #a0b8cc;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-dot.active {
+            background: #f4b836;
+            width: 36px;
+        }
+
+        .nav-dot:hover {
+            background: #2b6c94;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 16px 0 10px;
+        }
+
+        .control-btn {
+            background: white;
+            border: none;
+            font-size: 1.5rem;
+            padding: 12px 30px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #1e3b5c;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.2s;
+            border: 1px solid #cbd5e1;
+        }
+
+        .control-btn:hover {
+            background: #f4b836;
+            color: #0a1a2b;
+            border-color: #f4b836;
+        }
+
+        /* slide specific adjustments */
+        .highlight-red {
+            color: #b13e3e;
+            font-weight: 700;
+        }
+
+        .big-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1b4f72;
+            line-height: 1;
+        }
+
+        @media (max-width: 700px) {
+            .slide { padding: 32px 24px; }
+            .slide-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="slider-container">
+    <div class="controls">
+        <button class="control-btn" id="prevSlide"><i class="fas fa-chevron-left"></i> Назад</button>
+        <button class="control-btn" id="nextSlide">Вперед <i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <div class="slides" id="slidesContainer">
+        <!-- СЛАЙД 1. Стартовая фактическая ситуация -->
+        <div class="slide">
+            <div>
+                <div class="slide-header">
+                    <span class="slide-number">СЛАЙД 1</span>
+                </div>
+                <div class="slide-title">Стартовая фактическая ситуация</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-home"></i></span><span class="tesis-text"><strong>648</strong> квартир</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-file-signature"></i></span><span class="tesis-text">Продано <strong>31</strong></span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-chart-line"></i></span><span class="tesis-text">Темп: <strong>1–3 сделки/мес</strong></span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-database"></i></span><span class="tesis-text">CRM отсутствует → нет воронки и аналитики</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-coins"></i></span><span class="tesis-text">Экономики продаж нет → цена управляется вслепую</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-university"></i></span><span class="tesis-text">Есть банковская нагрузка (деталей нет)</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label"><i class="fas fa-brain"></i> ЛОГИКА УБЕЖДЕНИЯ</div>
+                        <div class="logic-content">Зафиксировать точку «как есть» — проблема существенная и подтверждена фактами.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-exclamation-triangle argument-icon"></i>
+                <span><strong>Аргумент для капитала:</strong> низкий темп = замороженная прибыль</span>
+            </div>
+            <div class="footer-note"><span>📉 617 квартир в ожидании</span><span>🏦 нагрузка без деталей</span></div>
+        </div>
+
+        <!-- СЛАЙД 2. Масштаб проблемы и горизонт реализации -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 2</span></div>
+                <div class="slide-title">Масштаб проблемы и горизонт реализации</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-door-open"></i></span><span class="tesis-text">Непродано ~<strong>617</strong> квартир</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-clock"></i></span><span class="tesis-text">При темпе 1–3 сделки/мес: <span class="big-number">17–51</span> <span style="font-size: 1.6rem;">лет</span></span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-building"></i></span><span class="tesis-text">Проект выходит за жизненный цикл девелопмента</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label"><i class="fas fa-chart-pie"></i> ЛОГИКА</div>
+                        <div class="logic-content">Показать непропорциональность объёма и темпа.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-chart-line argument-icon"></i>
+                <span><strong>Аргумент:</strong> удлинение цикла = падение стоимости актива и IRR</span>
+            </div>
+            <div class="footer-note"><span>⏳ горизонт — десятилетия</span><span>📉 IRR под угрозой</span></div>
+        </div>
+
+        <!-- СЛАЙД 3. Финансовые последствия для собственника -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 3</span></div>
+                <div class="slide-title">Финансовые последствия для собственника</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-money-bill-wave"></i></span><span class="tesis-text">Денежные потоки от продаж не закрывают банковскую нагрузку <span class="highlight-red">(факт риска)</span></span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-percent"></i></span><span class="tesis-text">Риски: рост ставок / пересмотр условий банком (типовая практика PF)</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-tools"></i></span><span class="tesis-text">Увеличение затрат на содержание проекта</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label"><i class="fas fa-link"></i> ЛОГИКА</div>
+                        <div class="logic-content">Связать низкий темп с прямыми финансовыми потерями.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-coins argument-icon"></i>
+                <span><strong>Аргумент:</strong> каждый месяц низких продаж — минус к капиталу</span>
+            </div>
+            <div class="footer-note"><span>📉 кэш-флоу не покрывает ставки</span><span>🏦 давление банка растёт</span></div>
+        </div>
+
+        <!-- СЛАЙД 4. Почему текущая модель не работает (системные причины) -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 4</span></div>
+                <div class="slide-title">Почему текущая модель не работает</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-times-circle"></i></span><span class="tesis-text">Нет CRM → нет контроля и управления воронкой</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-chart-simple"></i></span><span class="tesis-text">Нет экономики продаж → нельзя управлять ценой, каналами, конверсией</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-bullhorn"></i></span><span class="tesis-text">Нет маркетинговой стратегии и бюджетов</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-cogs"></i></span><span class="tesis-text">Процессы не масштабируемы</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label"><i class="fas fa-puzzle-piece"></i> ЛОГИКА</div>
+                        <div class="logic-content">Убрать иллюзию «починить точечно».</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-sitemap argument-icon"></i>
+                <span><strong>Аргумент:</strong> проблема внутри системы, не в рынке</span>
+            </div>
+            <div class="footer-note"><span>⚙️ системный сбой</span><span>📊 не хватает данных</span></div>
+        </div>
+
+        <!-- СЛАЙД 5. Рынок Белгорода: цена не является барьером -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 5</span></div>
+                <div class="slide-title">Рынок Белгорода: цена не является барьером</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-tag"></i></span><span class="tesis-text">Цена соответствует рынку <span style="font-weight:400;">(ваш факт)</span></span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-search"></i></span><span class="tesis-text">Если цена рыночная, а продаж нет → проблема организационная</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-leaf"></i></span><span class="tesis-text">Ошибка: ждать organic growth продаж</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label"><i class="fas fa-ban"></i> ЛОГИКА</div>
+                        <div class="logic-content">Исключить «цену» как объяснение.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-stethoscope argument-icon"></i>
+                <span><strong>Аргумент:</strong> неправильная диагностика ведёт к неправильным решениям</span>
+            </div>
+            <div class="footer-note"><span>🏙️ Белгород — платёжеспособный спрос</span><span>📈 цена не тормоз</span></div>
+        </div>
+
+        <!-- СЛАЙД 6. Прогноз при сохранении текущей модели (6–12 мес.) -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 6</span></div>
+                <div class="slide-title">Прогноз при сохранении текущей модели (6–12 мес.)</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-hourglass-half"></i></span><span class="tesis-text">Темп останется 1–3 сделки/мес.</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-scale-balanced"></i></span><span class="tesis-text">Банковская нагрузка будет доминировать над притоком денег</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-exclamation"></i></span><span class="tesis-text">Вероятность давления со стороны банка возрастёт (типовая практика PF)</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-arrow-down"></i></span><span class="tesis-text">Потребность в снижении цены для ускорения продаж — риск обесценения</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label"><i class="fas fa-eye"></i> ЛОГИКА</div>
+                        <div class="logic-content">Показать «цену бездействия».</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-water argument-icon"></i>
+                <span><strong>Аргумент:</strong> сохранение модели = потеря ликвидности</span>
+            </div>
+            <div class="footer-note"><span>⚠️ риск обесценения</span><span>🏦 банк может пересмотреть условия</span></div>
+        </div>
+
+        <!-- СЛАЙД 7. Антикризисная программа на 90 дней -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 7</span></div>
+                <div class="slide-title">Антикризисная программа на 90 дней</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-calendar-alt"></i></span><span class="tesis-text"><strong>0–30 дней:</strong> CRM, аналитика, экономика продаж, аудит продукта</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-calendar-alt"></i></span><span class="tesis-text"><strong>30–60 дней:</strong> запуск управляемых каналов, корректировка УТП, структура воронки</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-calendar-alt"></i></span><span class="tesis-text"><strong>60–90 дней:</strong> прогнозирование продаж, оптимизация CPL/CAC, стабильный отчётный контур</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label"><i class="fas fa-rocket"></i> ЛОГИКА</div>
+                        <div class="logic-content">Показать, что ситуация решаема через системные меры.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-shield-alt argument-icon"></i>
+                <span><strong>Аргумент:</strong> управляемость = защита капитала</span>
+            </div>
+            <div class="footer-note"><span>⏱️ 90 дней до управляемых продаж</span><span>📊 прозрачность</span></div>
+        </div>
+
+        <!-- СЛАЙД 8. Экономический эффект новой модели -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 8</span></div>
+                <div class="slide-title">Экономический эффект новой модели</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-gauge-high"></i></span><span class="tesis-text">Рост темпа продаж = сокращение цикла реализации</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-hand-holding-usd"></i></span><span class="tesis-text">Снижение давления банка через прирост выручки</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-chart-pie"></i></span><span class="tesis-text">Прирост капитализации через увеличение DCF</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-sliders"></i></span><span class="tesis-text">Управляемость ценой и конверсией</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label"><i class="fas fa-circle-dollar"></i> ЛОГИКА</div>
+                        <div class="logic-content">Связать операционное изменение с финансовым результатом.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-arrow-trend-up argument-icon"></i>
+                <span><strong>Аргумент:</strong> темп → деньги → капитал</span>
+            </div>
+            <div class="footer-note"><span>📈 DCF рост</span><span>💸 ликвидность ↑</span></div>
+        </div>
+
+        <!-- СЛАЙД 9. Текущая модель vs аутсорс-модель -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 9</span></div>
+                <div class="slide-title">Текущая модель vs аутсорс-модель</div>
+                <div class="title-underline"></div>
+                <div class="content-grid" style="gap: 15px;">
+                    <div class="tesis-list" style="background: #fcf0f0; padding: 20px; border-radius: 24px;">
+                        <h3 style="color:#b13e3e;">🚫 Текущая</h3>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-database"></i></span>Отсутствие данных, слабая воронка</div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-hand"></i></span>Ручные процессы, низкий темп</div>
+                    </div>
+                    <div class="tesis-list" style="background: #e1f0fa; padding: 20px; border-radius: 24px;">
+                        <h3 style="color:#1b4f72;">⚙️ Аутсорс</h3>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-chart-bar"></i></span>CRM, аналитика, перформанс-каналы</div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-chart-line"></i></span>Прогноз продаж, управляемая конверсия</div>
+                    </div>
+                </div>
+                <div class="logic-box" style="margin-top: 20px;">
+                    <div class="logic-label">ЛОГИКА</div>
+                    <div class="logic-content">Сравнение «ручной» и «индустриальной» модели продаж.</div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-rocket argument-icon"></i>
+                <span><strong>Аргумент:</strong> аутсорс снижает риск, ускоряет цикл и повышает ликвидность.</span>
+            </div>
+            <div class="footer-note"><span>🤝 индустриальные продажи</span><span>📊 вместо ручного труда</span></div>
+        </div>
+
+        <!-- СЛАЙД 10. Итоговое решение для собственника -->
+        <div class="slide">
+            <div>
+                <div class="slide-header"><span class="slide-number">СЛАЙД 10</span></div>
+                <div class="slide-title">Итоговое решение для собственника</div>
+                <div class="title-underline"></div>
+                <div class="content-grid">
+                    <div class="tesis-list">
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-exclamation-triangle"></i></span><span class="tesis-text">Проект в зоне повышенного риска из-за низкого темпа продаж</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-arrow-right"></i></span><span class="tesis-text">Требуется переход к управляемой модели маркетинга и продаж</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-handshake"></i></span><span class="tesis-text">Предложение: передать продажи на аутсорс с полной аналитикой и контролем</span></div>
+                        <div class="tesis-item"><span class="tesis-icon"><i class="fas fa-medal"></i></span><span class="tesis-text">Результат → ускорение цикла, снижение банковского давления, рост стоимости актива</span></div>
+                    </div>
+                    <div class="logic-box">
+                        <div class="logic-label">ЛОГИКА ВЫБОРА</div>
+                        <div class="logic-content">Свести к бинарному выбору: модель, которая теряет капитал, или модель, которая его защищает.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="argument-block">
+                <i class="fas fa-shield-halved argument-icon"></i>
+                <span><strong>Аргумент:</strong> аутсорс — инструмент защиты ваших инвестиций.</span>
+            </div>
+            <div class="footer-note"><span>✅ капитал под защитой</span><span>📞 контакт для запуска</span></div>
+        </div>
+    </div>
+
+    <div class="nav-dots" id="navDots">
+        <!-- JS будет заполнять -->
+    </div>
+</div>
+
+<script>
+    (function() {
+        const slidesContainer = document.getElementById('slidesContainer');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        const navDots = document.getElementById('navDots');
+
+        let currentIndex = 0;
+
+        // create dots
+        slides.forEach((_, idx) => {
+            const dot = document.createElement('span');
+            dot.classList.add('nav-dot');
+            dot.dataset.index = idx;
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                scrollToSlide(index);
+            });
+            navDots.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.nav-dot');
+
+        function updateDots(index) {
+            dots.forEach((dot, i) => {
+                if (i === index) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        function scrollToSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+            slides[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            currentIndex = index;
+            updateDots(index);
+        }
+
+        // Обработка скролла (какое слайд активно)
+        const observerOptions = {
+            root: slidesContainer,
+            threshold: 0.6,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(slides).indexOf(entry.target);
+                    if (index !== -1) {
+                        currentIndex = index;
+                        updateDots(index);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        slides.forEach(slide => observer.observe(slide));
+
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToSlide(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToSlide(currentIndex + 1);
+        });
+
+        // init first active
+        updateDots(0);
+    })();
+</script>
+
+<!-- небольшой текст под слайдером -->
+<div style="color:#aab8c5; margin-top: 24px; font-size: 0.9rem; max-width: 900px; text-align: center;">
+    ⚡ Презентация построена на фактах: 648 квартир, темп 1–3, отсутствие CRM, риск обесценения. Антикризисная программа на 90 дней и переход на аутсорс — защита капитала.
+</div>
+</body>
+</html>
